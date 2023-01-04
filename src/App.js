@@ -37,7 +37,7 @@ export default function App() {
       <h1>Guess the Flag</h1>
       <input onChange={flagHandler} type="text" placeholder="Look for a flag" />
       <h5>Name! {flag}</h5>
-      <h6>Flags we know</h6>
+      <h5>Flags we know</h5>
       <div>
         {flagsWeKnow.map((item) => {
           return (
