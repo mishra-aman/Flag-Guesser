@@ -1,43 +1,64 @@
-import "./styles.css";
+import React from "react";
 import { useState } from "react";
+import "./styles.css";
+
+const flagDb = {
+  "🇮🇳": "India",
+  "🇦🇪": "United Arab Emirates",
+  "🇦🇫": "Afghanistan",
+  "🇦🇬": "Antigua & Barbuda",
+  "🇦🇮": "Anguilla",
+  "🇦🇱": "Albania",
+  "🇦🇲": "Armenia",
+  "🇦🇴": "Angola",
+  "🇦🇶": "Antarctica",
+  "🇦🇷": "Argentina",
+  "🇦🇸": "American Samoa",
+  "🇦🇹": "Austria",
+  "🇦🇺": "Australia",
+  "🇦🇼": "Aruba",
+};
+
+const flagsWeKnow = Object.keys(flagDb);
+
 export default function App() {
   const [flag, setFlag] = useState("");
-
-  const flagDb = {
-    "🇦🇪": "United Arab Emirates",
-    "🇦🇫": "Afghanistan",
-    "🇦🇬": "Antigua & Barbuda",
-    "🇦🇮": "Anguilla",
-    "🇦🇱": "Albania",
-    "🇦🇲": "Armenia",
-    "🇦🇴": "Angola",
-    "🇦🇶": "Antarctica",
-    "🇦🇷": "Argentina",
-    "🇦🇸": "American Samoa",
-    "🇦🇹": "Austria",
-    "🇦🇺": "Australia",
-    "🇦🇼": "Aruba"
-  };
-
-  const flagsWeKnow = Object.keys(flagDb);
+  const [flagName, setFlagName] = useState("Flag Name");
 
   function flagHandler(e) {
     let userInputFlag = e.target.value;
-    if (flagDb[userInputFlag] === undefined) {
-      return "Not found";
+    setFlag(userInputFlag);
+
+    if (userInputFlag in flagDb) {
+      setFlagName(flagDb[userInputFlag]);
+    } else {
+      setFlagName("Flag not found");
     }
-    setFlag(flagDb[userInputFlag]);
+    if (userInputFlag === "") {
+      setFlagName("");
+    }
   }
 
-  function flagClickHandler(flag) {
-    setFlag(flagDb[flag]);
+  function flagClickHandler(userInputFlag) {
+    setFlagName(flagDb[userInputFlag]);
   }
   return (
     <div className="App">
       <h1>Guess the Flag</h1>
-      <input onChange={flagHandler} type="text" placeholder="Look for a flag" />
-      <h5>Name! {flag}</h5>
-      <h5>Flags we know</h5>
+      <input
+        onChange={flagHandler}
+        value={flag}
+        placeholder={"Search your flag"}
+        style={{
+          padding: "1.2em",
+          border: "2px solid black",
+          minWidth: "80%",
+          marginTop: "90px",
+          marginBottom: "50px",
+        }}
+      />
+      <h2>{flag}</h2>
+      <h3> {flagName} </h3>
       <div>
         {flagsWeKnow.map((item) => {
           return (
