@@ -14,7 +14,7 @@ React
 
 # Hosting URL :
 
-https://zuuf9f.csb.app
+https://foprn6.csb.app/
 
 
 # Screenshot
